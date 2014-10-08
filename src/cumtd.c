@@ -21,7 +21,7 @@ typedef struct departure_t {
   char *time;
 } Departure;
 static Departure departures[DEP_NUM_MENU_ITEMS];
-static char *dep_code = "Departures";
+static char dep_code [25]; //12 characters for "departures: " and some extra for stopcode 
 static int dep_menu_size = 0;
 
 static const bool animated = true;
@@ -37,10 +37,6 @@ enum {
 };
 
 static void update_code(char *new_code) {
-  if (dep_code) {
-    free(dep_code);
-  }
-  dep_code = malloc(sizeof(char)*(strlen(new_code)+1+12));
   strcpy(dep_code, "Departures: ");
   strcat(dep_code, new_code);
   APP_LOG(APP_LOG_LEVEL_DEBUG, "New Dep Code: %s", dep_code);
@@ -234,9 +230,6 @@ static void dep_window_unload(Window *window) {
     }
   }
   dep_menu_size = 0;
-  if (dep_code) {
-    free(dep_code);
-  }
   menu_layer_destroy(dep_menu_layer);
 }
 
