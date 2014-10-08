@@ -38,7 +38,7 @@ enum {
 
 static void update_code(char *new_code) {
   strcpy(dep_code, "Departures: ");
-  strcat(dep_code, new_code);
+  strncat(dep_code, new_code, 25-12-1);
   APP_LOG(APP_LOG_LEVEL_DEBUG, "New Dep Code: %s", dep_code);
 }
 
